@@ -70,6 +70,9 @@
                 type: "GET",
             }).done(function (data) {
                 for (var item of data) {
+                    var option=document.createElement("option");
+                    option.innerHTML=item.站點名稱;
+                    document.getElementById("hotel").appendChild(option);
                     var marker = new google.maps.Marker({
                         position: {
                             lat: parseFloat(item.緯度),
@@ -194,6 +197,9 @@
                 type: "GET",
             }).done(function (data) {
                 for (var item of data) {
+                    var option=document.createElement("option");
+                    option.innerHTML=item.店家名稱;
+                    document.getElementById("rest").appendChild(option);
                     var address = item.地址;
                     if (address === "") continue;
                     $.ajax({
