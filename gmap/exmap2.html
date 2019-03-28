@@ -42,7 +42,7 @@
                         },
                         map: map,
                         icon: "http://icons.iconarchive.com/icons/iconsmind/outline/32/Hotel-icon.png",
-                        // title: item.站點名稱
+                        title: item.站點名稱
                     });
 
                     marker.addListener("click", function (e) {
@@ -89,7 +89,8 @@
 
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
-                type: "GET"
+                type: "GET",
+                dataType: 'json'
             }).done(function (data) {
                 for (var item of data) {
                     var address = item.地址;
