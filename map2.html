@@ -1,0 +1,144 @@
+<html>
+
+<head>
+    <style>
+        .mapstyle {
+            width: 700px;
+            height: 500px;
+            float: left;
+        }
+
+        .directionstyle {
+            width: 300px;
+            height: 500px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" class="mapstyle"></div>
+    <div id="direction" class="directionstyle"></div>
+    <div style="clear:both">
+        DRIVING Distance:
+        <span id="totalDistnceText"></span>
+        ,Time:
+        <span id="totalTime"></span>
+        ,Section:
+        <span id="totalSection"></span>
+    </div>
+    <div style="clear:both">
+        TRANSIT Distance:
+        <span id="totalDistnceText1"></span>
+        ,Time:
+        <span id="totalTime1"></span>
+        ,Section:
+        <span id="totalSection1"></span>
+    </div>
+    <div style="clear:both">
+        WALKING Distance:
+        <span id="totalDistnceText2"></span>
+        ,Time:
+        <span id="totalTime2"></span>
+        ,Section:
+        <span id="totalSection2"></span>
+    </div>
+</body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU" async
+    defer></script>
+<script>
+    var map;
+    var marker = null;
+    var center = {
+        lat: 24.7571075,
+        lng: 120.952429
+    };
+    var directionsService = null;
+    var directionsDisplay = null;
+
+    window.onload = function () {
+
+        map = new google.maps.Map(
+            document.getElementById('map'), {
+                center: center,
+                zoom: 15
+            });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('direction'));
+
+        directionsService.route({
+            origin: "中華大學",
+            destination: "新竹高鐵站",
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections();
+                console.log(response);
+                var leg = response.routes[0].legs[0];
+                var totalDistences = 0;
+                var totalTime = 0;
+                for (var step of leg.steps) {
+                    totalDistences += parseInt(step.distance.value) / 1000;
+                    totalTime += parseInt(step.duration.value) / 60;
+                }
+                document.getElementById("totalDistnceText").innerText = totalDistences;
+                document.getElementById("totalTime").innerText = totalTime;
+                document.getElementById("totalSection").innerText = leg.steps.length;
+
+            } else {
+                // window.alert('Directions request failed due to ' + status);
+            }
+        });
+        //
+        directionsService.route({
+            origin: "中華大學",
+            destination: "新竹高鐵站",
+            travelMode: 'TRANSIT'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+                var leg = response.routes[0].legs[0];
+                var totalDistences = 0;
+                var totalTime = 0;
+                for (var step of leg.steps) {
+                    totalDistences += parseInt(step.distance.value) / 1000;
+                    totalTime += parseInt(step.duration.value) / 60;
+                }
+                document.getElementById("totalDistnceText1").innerText = totalDistences;
+                document.getElementById("totalTime1").innerText = totalTime;
+                document.getElementById("totalSection1").innerText = leg.steps.length;
+
+            } else {
+                // window.alert('Directions request failed due to ' + status);
+            }
+        });
+        //
+        directionsService.route({
+            origin: "中華大學",
+            destination: "新竹高鐵站",
+            travelMode: 'WALKING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+                var leg = response.routes[0].legs[0];
+                var totalDistences = 0;
+                var totalTime = 0;
+                for (var step of leg.steps) {
+                    totalDistences += parseInt(step.distance.value) / 1000;
+                    totalTime += parseInt(step.duration.value) / 60;
+                }
+                document.getElementById("totalDistnceText2").innerText = totalDistences;
+                document.getElementById("totalTime2").innerText = totalTime;
+                document.getElementById("totalSection2").innerText = leg.steps.length;
+
+            } else {
+                // window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+</script>
+
+</html>
