@@ -11,7 +11,6 @@
             width: 600px;
             height: 600px;
             float: left;
-            position: relative;
         }
 
         .directionstyle {
@@ -19,7 +18,7 @@
             /* height: 500px; */
             float: left;
             text-align: left;
-            margin: 10px 0 0 20px;
+            /* margin: 10px 0 0 20px; */
         }
     </style>
     <!-- Bootstrap CSS -->
@@ -31,45 +30,46 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div id="map" class="mapstyle"></div>
 
             </div>
+            <div class="col m-3">
+                <h1>預估交通費用</h1>
+            </div>
             <div class="col">
-                <div>
-                    DRIVING Distance:
-                    <span id="totalDistnceText"></span>
-                    ,Time:
-                    <span id="totalTime"></span>
-                    ,Section:
-                    <span id="totalSection"></span>
-                    ,TollDistences:
-                    <span id="TollDistences"></span>
-                    money:
-                    <span id="money"></span>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="map" class="mapstyle"></div>
+            </div>
+            <div class="col">
+                <div class="border border-dark p-2 mt-3">
+                    <p class="lead">自行開車</p>
+                    距離:
+                    <p id="totalDistnceText"></p>
+                    時間:
+                    <p id="totalTime"></p>
+                    費用:
+                    <p id="money"></p>
                 </div>
-                <div>
-                    TAXING Distance:
-                    <span id="totalDistnceText1"></span>
-                    ,Time:
-                    <span id="totalTime1"></span>
-                    ,Section:
-                    <span id="totalSection1"></span>
-                    ,TollDistences:
-                    <span id="TollDistences1"></span>
-                    money:
-                    <span id="money1"></span>
+                <div class="border border-dark p-2 mt-1">
+                    <p class="lead">搭計程車</p>
+                    距離:
+                    <p id="totalDistnceText1"></p>
+                    時間:
+                    <p id="totalTime1"></p>
+                    費用:
+                    <p id="money1"></p>
                 </div>
-                <div>
-                    TRANSIT Distance:
-                    <span id="totalDistnceText2"></span>
-                    ,Time:
-                    <span id="totalTime2"></span>
-                    ,Section:
-                    <span id="totalSection2"></span>
-                    ,TollDistences:
-                    <span id="TollDistences2"></span>
-                    money:
-                    <span id="money2"></span>
+                <div class="border border-dark p-2 mt-1">
+                    <p class="lead">大眾運輸</p>
+                    距離:
+                    <p id="totalDistnceText2"></p>
+                    時間:
+                    <p id="totalTime2"></p>
+                    費用:
+                    <p id="money2"></p>
                 </div>
             </div>
             <div class="col">
