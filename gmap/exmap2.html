@@ -33,7 +33,6 @@
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json",
                 type: "GET",
-                dataType: 'jsonp'
             }).done(function (data) {
                 for (var item of data) {
                     var marker = new google.maps.Marker({
@@ -91,7 +90,6 @@
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
                 type: "GET",
-                dataType: 'json'
             }).done(function (data) {
                 for (var item of data) {
                     var address = item.地址;
@@ -156,7 +154,6 @@
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
                 type: "GET",
-                dataType: 'json'
             }).done(function (data) {
                 for (var item of data) {
                     var address = item.地址;
