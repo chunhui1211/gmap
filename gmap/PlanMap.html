@@ -45,143 +45,109 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>    
-        var map;
-        var marker = null, marker2 = null, marker3 = null;
-        var center = { lat: 24.7571075, lng: 120.952429 };
-        var routes = [];
-        var Service = null;
-        var Display = null;
+    <script>
         $(function () {
-    
-          map = new google.maps.Map(
-            document.getElementById("map"), {
-              center: center,
-              zoom: 15
+            var map;
+            var marker = null;
+            var center = {
+                lat: 24.7571075,
+                lng: 120.952429
+            };
+            var waypoints = [];
+            var routes = [];
+            var directionsService = new google.maps.DirectionsService();
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: center,
+                zoom: 13
             });
-          Service = new google.maps.DirectionsService();
-          Display = new google.maps.DirectionsRenderer();
-          Display.setMap(map);
-          document.getElementById('create').addEventListener('click', function () {
-            calculateAndDisplayRoute(Service, Display);
-          });
-    
-          function calculateAndDisplayRoute(Service, Display) {
-            var waypts = [];
-            var point_Array = document.getElementById('point_option');
-            for (var i = 0; i < point_Array.length; i++) {
-              if (point_Array.options[i].selected) {
-                waypts.push({
-                  location: point_Array[i].value,
-                  stopover: true
-                });
-              }
+            directionsDisplay.setMap(map);
+
+            function displayRoute(directionsService,directionsDisplay)
+            {
+                
             }
-            var restaurant_Array = document.getElementById('restaurant_option');
-            for (var i = 0; i < restaurant_Array.length; i++) {
-              if (restaurant_Array.options[i].selected) {
-                 console.log("!");
-                 waypts.push({
-                  location: restaurant_Array[i].value,
-                  stopover: true
-                 
-                });
-              }
-            }
-    
-            Service.route({
-              origin: document.getElementById('hotel_option').value,
-              destination: document.getElementById('restaurant_option').value,
-              waypoints: waypts,
-              optimizeWaypoints: true,
-              travelMode: 'DRIVING'
-            }, function (response, status) {
-              if (status === 'OK') {
-                Display.setDirections(response);
-              } else {
-                window.alert('Directions request failed due to ' + status);
-              }
-            });
-          }
-    
-          $.ajax({
-            url: "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json",
-            type: "GET"
-          }).done(function (data) {
-            for (var item of data) {
-              var option = document.createElement("option");
-              option.innerHTML = item.旅館名稱;
-              document.getElementById("hotel_option").appendChild(option);
-              marker = new google.maps.Marker({
-                position: { lat: parseFloat(item.緯度), lng: parseFloat(item.經度) },
-                map: map,
-                icon: "http://icons.iconarchive.com/icons/webalys/kameleon.pics/32/Apartment-icon.png",
-                title: item.旅館名稱
-              });
-            }
-          });
-    
-          $.ajax({
-            url: 'http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json',
-            type: 'GET'
-          }).done(function (data) {
-            for (var item of data) {
-              // console.log(item);
-              var address = item.地址;
-              if (address === '')
-                continue;
-    
-              //console.log(address);
-              $.ajax({
-                url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyA_jVrv3dEPP-tyIVAXWFwjGOJPfQC0oTE',
-                type: 'GET',
-                async: false
-              }).done(function (data) {
-                // console.log(data);
-                if (data.status == "OK") {
-                  var option = document.createElement("option");
-                  option.innerHTML = item.景點名稱;
-                  document.getElementById("point_option").appendChild(option);
-                  marker2 = new google.maps.Marker({
-                    position: data.results[0].geometry.location,
-                    map: map,
-                    icon: "http://icons.iconarchive.com/icons/webalys/kameleon.pics/32/Beach-icon.png",
-                    title: item.景點名稱
-                  })
+
+            $.ajax({
+                url: "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json",
+                type: "GET",
+            }).done(function (data) {
+                for (var item of data) {
+                    var option=document.createElement("option");
+                    option.innerHTML=item.旅館名稱;
+                    document.getElementById("hotel").appendChild(option);
+                    var marker = new google.maps.Marker({
+                        position: {
+                            lat: parseFloat(item.緯度),
+                            lng: parseFloat(item.經度)
+                        },
+                        map: map,
+                        icon: "http://icons.iconarchive.com/icons/iconsmind/outline/32/Hotel-icon.png",
+                        title: item.站點名稱
+                    });
                 }
-              });
-            }
-          });
-    
-          $.ajax({
-            url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
-            type: "GET"
-          }).done(function (data) {
-            for (var item of data) {
-              var address = item.地址;
-              if (address === '')
-                continue;
-              $.ajax({
-                url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + '&key=AIzaSyA_jVrv3dEPP-tyIVAXWFwjGOJPfQC0oTE',
-                type: 'GET',
-                async: false
-              }).done(function (data) {
-                if (data.status == "OK") {
-                  var option = document.createElement("option");
-                  option.innerHTML = item.店家名稱;
-                  document.getElementById("restaurant_option").appendChild(option);
-                  marker3 = new google.maps.Marker({
-                    position: data.results[0].geometry.location,
-                    map: map,
-                    icon: "http://icons.iconarchive.com/icons/webalys/kameleon.pics/32/Food-Dome-icon.png",
-                    title: item.店家名稱
-                  })
+            })
+
+            $.ajax({
+                url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
+                type: "GET",
+            }).done(function (data) {
+                for (var item of data) {
+                    var option=document.createElement("option");
+                    option.innerHTML=item.景點名稱;
+                    document.getElementById("place").appendChild(option);
+                    var address = item.地址;
+                    if (address === "") continue;
+                    $.ajax({
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                            address +
+                            '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
+                        type: "GET"
+                    }).done(function (data) {
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: data.results[0].geometry.location.lat,
+                                lng: data.results[0].geometry.location.lng
+                            },
+                            map: map,
+                            icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Travel-Coliseum-icon.png",
+                            title: item.景點名稱
+                        });
+                    })
                 }
-              });
-            }
-          });
-        });
-      </script>
+            })
+
+            $.ajax({
+                url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
+                type: "GET",
+            }).done(function (data) {
+                for (var item of data) {
+                    var option=document.createElement("option");
+                    option.innerHTML=item.店家名稱;
+                    document.getElementById("rest").appendChild(option);
+                    var address = item.地址;
+                    if (address === "") continue;
+                    $.ajax({
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                            address +
+                            '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
+                        type: "GET"
+                    }).done(function (data) {
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: data.results[0].geometry.location.lat,
+                                lng: data.results[0].geometry.location.lng
+                            },
+                            map: map,
+                            icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Food-Cutlery-icon.png",
+                            title: item.店家名稱
+                        });
+
+                    })
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>
