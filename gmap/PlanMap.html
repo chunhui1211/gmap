@@ -139,6 +139,7 @@
                             '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
                         type: "GET"
                     }).done(function (data) {
+                        console.log(data.results[0]);
                         var marker = new google.maps.Marker({
                             position: {
                                 lat: parseFloat(item.緯度),
