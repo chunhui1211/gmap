@@ -126,6 +126,7 @@
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
                 type: "GET",
+                async: false
             }).done(function (data) {
                 for (var item of data) {
                     var option=document.createElement("option");
@@ -157,8 +158,10 @@
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
                 type: "GET",
+                async: false
             }).done(function (data) {
                 for (var item of data) {
+                    console.log(item);
                     var option=document.createElement("option");
                     option.innerHTML=item.店家名稱;
                     document.getElementById("rest").appendChild(option);
