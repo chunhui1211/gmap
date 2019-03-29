@@ -107,8 +107,6 @@
                 url: "http://opendata.hccg.gov.tw/dataset/39ee314b-7ce7-4265-a6b5-b57f42392da8/resource/6a3a5f61-5383-419d-a94c-df710071a51e/download/20180321131425502.json",
                 type: "GET",
             }).done(function (data) {
-                console.log(data);
-                console.log(data.results[0].geometry.location);
                 for (var item of data) {
                     var option=document.createElement("option");
                     option.innerHTML=item.旅館名稱;
@@ -141,8 +139,6 @@
                             '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
                         type: "GET"
                     }).done(function (data) {
-                        // console.log(data);
-                        // console.log(data.results[0].geometry.location);
                         var marker = new google.maps.Marker({
                             position: {
                                 lat: parseFloat(item.緯度),
