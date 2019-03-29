@@ -75,7 +75,6 @@
                         location: place_Array[i].value,
                         stopover: true
                         });
-                        console.log(place_Array[i].value);
                     }
                 }
                 var rest_Array = document.getElementById('rest');
@@ -125,34 +124,54 @@
             })
 
             $.ajax({
-                url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
+                url: "http://opendata.hccg.gov.tw/dataset/7ea7e303-df62-4fbe-a84f-99bdd724b577/resource/c15a9c5f-f6cb-4da5-b8a6-5e7bc4c9eb08/download/20180501160733080.json",
                 type: "GET",
-                async: false
             }).done(function (data) {
                 for (var item of data) {
                     var option=document.createElement("option");
-                    option.innerHTML=item.景點名稱;
+                    option.innerHTML=item.旅館名稱;
                     document.getElementById("place").appendChild(option);
-                    var address = item.地址;
-                    if (address === "") continue;
-                    $.ajax({
-                        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-                            address +
-                            '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
-                        type: "GET"
-                    }).done(function (data) {
-                        var marker = new google.maps.Marker({
-                            position: {
-                                lat: parseFloat(item.緯度),
-                                lng: parseFloat(item.經度)
-                            },
-                            map: map,
-                            icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Travel-Coliseum-icon.png",
-                            title: item.景點名稱
-                        });
-                    })
+                    var marker = new google.maps.Marker({
+                        position: {
+                            lat: parseFloat(item.緯度),
+                            lng: parseFloat(item.經度)
+                        },
+                        map: map,
+                        icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Travel-Coliseum-icon.png",
+                        title: item.站點名稱
+                    });
                 }
             })
+
+            // $.ajax({
+            //     url: "http://opendata.hccg.gov.tw/dataset/07caf18a-a966-4409-810a-ce3fdb7447b7/resource/3bca2d3b-177c-4e4a-9576-4a3ed8c81612/download/20180307114843661.json",
+            //     type: "GET",
+            //     async: false
+            // }).done(function (data) {
+            //     for (var item of data) {
+            //         var option=document.createElement("option");
+            //         option.innerHTML=item.景點名稱;
+            //         document.getElementById("place").appendChild(option);
+            //         var address = item.地址;
+            //         if (address === "") continue;
+            //         $.ajax({
+            //             url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+            //                 address +
+            //                 '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
+            //             type: "GET"
+            //         }).done(function (data) {
+            //             var marker = new google.maps.Marker({
+            //                 position: {
+            //                     lat: parseFloat(item.緯度),
+            //                     lng: parseFloat(item.經度)
+            //                 },
+            //                 map: map,
+            //                 icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Travel-Coliseum-icon.png",
+            //                 title: item.景點名稱
+            //             });
+            //         })
+            //     }
+            // })
 
             $.ajax({
                 url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
