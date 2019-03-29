@@ -133,6 +133,8 @@
                     document.getElementById("place").appendChild(option);
                     var address = item.地址;
                     if (address === "") continue;
+                    console.log(address);
+                    console.log(item.緯度,item.經度);
                     $.ajax({
                         url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
                             address +
