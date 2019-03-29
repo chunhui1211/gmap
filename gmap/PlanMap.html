@@ -156,23 +156,24 @@
                     document.getElementById("rest").appendChild(option);
                     var address = item.地址;
                     if (address === "") continue;
-                    // $.ajax({
-                    //     url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-                    //         address +
-                    //         '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
-                    //     type: "GET"
-                    // }).done(function (data) {
-                    //     var marker = new google.maps.Marker({
-                    //         position: {
-                    //             lat: parseFloat(item.緯度),
-                    //             lng: parseFloat(item.經度)
-                    //         },
-                    //         map: map,
-                    //         icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Food-Cutlery-icon.png",
-                    //         title: item.店家名稱
-                    //     });
-
-                    // })
+                    $.ajax({
+                        url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+                            address +
+                            '&key=AIzaSyB5VnrKtEbXGov9c2ucVtK6Xg3foOjxoHU',
+                        type: "GET"
+                    }).done(function (data) {
+                        console.log(data);
+                        var marker = new google.maps.Marker({
+                            position: {
+                                lat: parseFloat(item.緯度),
+                                lng: parseFloat(item.經度)
+                            },
+                            map: map,
+                            icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Food-Cutlery-icon.png",
+                            title: item.店家名稱
+                        });
+                        console.log(position);
+                    })
                 }
             })
         })
