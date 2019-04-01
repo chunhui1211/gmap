@@ -145,7 +145,6 @@
                             var leg = response.routes[0].legs[0];
                             var totalDistences = 0;
                             var totalTime = 0;
-                            var Tollsection = 0;
                             var TollDistences = 0;
                             var money = 0;
                             for (var step of leg.steps) {
@@ -155,7 +154,6 @@
                                 var Distences = step.instructions;
                                 Distences.includes("收費路段");
                                 if (Distences.includes("收費路段") == true) {
-                                    // Tollsection++;
                                     TollDistences += parseInt(step.distance.value) / 1000;
                                 }
                                 // console.log(Distences);
@@ -176,11 +174,10 @@
                                 tax = Math.round(tax * 100) / 100;
                                 var taxmoney = (85 + tax * 5) + TollDistences * 1.2;
                             }
-                            document.getElementById("totalDistnceText1").innerText = totalDistences;
-                            document.getElementById("totalTime1").innerText = totalTime;
-                            document.getElementById("totalSection1").innerText = leg.steps.length;
-                            document.getElementById("TollDistences1").innerText = TollDistences;
-                            document.getElementById("money1").innerText = taxmoney;
+                            document.getElementById("totalDistnceText1").innerText = totalDistences+"公里";;
+                            document.getElementById("totalTime1").innerText = totalTime+"分";;
+                            document.getElementById("TollDistences1").innerText = TollDistences+"公里";;
+                            document.getElementById("money1").innerText = taxmoney+"元";;
 
 
                         } else {
@@ -193,6 +190,7 @@
                         destination: point2,
                         travelMode: 'TRANSIT'
                     }, function (response, status) {
+                        console.log(response);
                         if (status === 'OK') {
                             directionsDisplay.setDirections(response);
                             var leg = response.routes[0].legs[0];
@@ -205,9 +203,8 @@
                                 totalTime = Math.round(totalTime * 100) / 100;
                                 console.log(step);
                             }
-                            document.getElementById("totalDistnceText2").innerText = totalDistences;
-                            document.getElementById("totalTime2").innerText = totalTime;
-                            // document.getElementById("totalSection2").innerText = leg.steps.length;
+                            document.getElementById("totalDistnceText2").innerText = totalDistences+"公里";;
+                            document.getElementById("totalTime2").innerText = totalTime+"分";;
                             document.getElementById("money2").innerText = "查無此票價";
 
                         } else {
