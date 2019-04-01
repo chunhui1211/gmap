@@ -43,25 +43,23 @@
                     <p class="lead">自行開車</p>
                     距離:
                     <span id="totalDistnceText"></span><br/>
+                    收費路段:
+                    <span id="TollDistences"></span><br/>
                     時間:
                     <span id="totalTime"></span><br/>
                     費用:
-                    <span id="money"></span><br/>
-                    收費路段:
-                    <span id="TollDistences"></span><br/>
+                    <span id="money"></span><br/>                   
                 </div>
                 <div class="p-2 mt-1">
                     <p class="lead">搭計程車</p>
                     距離:
                     <span id="totalDistnceText1"></span><br/>
+                    收費路段:
+                    <span id="TollDistences1"></span><br/>
                     時間:
                     <span id="totalTime1"></span><br/>
                     費用:
                     <span id="money1"></span><br/>
-                    totalSection:
-                    <span id="totalSection1"></span><br/>
-                    TollDistences:
-                    <span id="TollDistences1"></span><br/>
                 </div>
                 <div class="p-2 mt-1">
                     <p class="lead">大眾運輸</p>
@@ -160,17 +158,16 @@
                                     // Tollsection++;
                                     TollDistences += parseInt(step.distance.value) / 1000;
                                 }
-
-                                console.log(Distences);
+                                // console.log(Distences);
                                 money = Math.floor((totalDistences * 5) + (TollDistences * 1.2));
                                 totalDistences = Math.round(totalDistences * 100) / 100;
                                 totalTime = Math.round(totalTime * 100) / 100;
                                 TollDistences = Math.round(TollDistences * 100) / 100;
                             }
-                            document.getElementById("totalDistnceText").innerText = totalDistences;
-                            document.getElementById("totalTime").innerText = totalTime;
-                            document.getElementById("TollDistences").innerText = TollDistences;
-                            document.getElementById("money").innerText = money;
+                            document.getElementById("totalDistnceText").innerText = totalDistences+"公里";
+                            document.getElementById("totalTime").innerText = totalTime+"分";
+                            document.getElementById("TollDistences").innerText = TollDistences+"公里";
+                            document.getElementById("money").innerText = money+"元";
                             // console.log(leg.steps);
                             if (totalDistences <= 1.5) {
                                 var taxmoney = 85;
