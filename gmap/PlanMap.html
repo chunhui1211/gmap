@@ -20,6 +20,7 @@
                 <h1>新竹景點規劃</h1>
             </div>
             <div class="col">
+
             </div>
         </div>
         <div class="row">
@@ -42,6 +43,7 @@
                 <div class="row">
                     <button type="button" id="create" class="btn btn-light">規劃路線</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -143,6 +145,37 @@
                 }
             })
 
+
+
+            // $.ajax({
+            //     url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
+            //     type: "GET",
+            //     async: false
+            // }).done(function (data) {
+            //     for (var item of data) {
+            //         var option=document.createElement("option");
+            //         option.innerHTML=item.店家名稱;
+            //         document.getElementById("rest").appendChild(option);
+            //         var address = item.地址;
+            //         if (address === "") continue;
+            //         $.ajax({
+            //             url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+            //                 address +
+            //                 '&key=AIzaSyB0_-U-skHafECDgEBL50D41wyRuplFMlY',
+            //             type: "GET"
+            //         }).done(function (data) {
+            //             var marker = new google.maps.Marker({
+            //                 position: {
+            //                     lat: data.results[0].geometry.location.lat,
+            //                     lng: data.results[0].geometry.location.lng
+            //                 },
+            //                 map: map,
+            //                 icon: "http://icons.iconarchive.com/icons/icons8/ios7/32/Food-Cutlery-icon.png",
+            //                 title: item.店家名稱
+            //             });
+            //         })
+            //     }
+            // })
         })
     </script>
 </body>
