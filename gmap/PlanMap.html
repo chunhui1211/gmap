@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="form-group">
                         <p>旅館</p>
-                        <select id="hotel" class="form-control" style="width:400px;"></select>
+                        <select id="hotel" class="form-control" style="width:400px;" multiple></select>
                     </div>
                 </div>
                 <div class="row">
@@ -81,11 +81,11 @@
                         });
                     }
                 }
-                var rest_Array = document.getElementById('rest');
-                for (var i = 0; i < rest_Array.length; i++) {
-                    if (rest_Array.options[i].selected) {
+                var hotel_Array = document.getElementById('hotel');
+                for (var i = 0; i < hotel_Array.length; i++) {
+                    if (hotel_Array.options[i].selected) {
                         waypoints.push({
-                            location: rest_Array[i].value,
+                            location: hotel_Array[i].value,
                             stopover: true
                         });
                     }
