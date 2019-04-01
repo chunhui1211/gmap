@@ -116,11 +116,6 @@
 
             map.addListener("click", function (e) {
 
-                // if (point1 != null && point2 != null) {
-                //     point1 = null;
-                //     point2 = null;
-                // }
-
                 if (point1 == null) {
                     point1 = e.latLng.lat() + ',' + e.latLng.lng();
                     return;
@@ -166,7 +161,7 @@
                             document.getElementById("totalTime").innerText = totalTime+"分";
                             document.getElementById("TollDistences").innerText = TollDistences+"公里";
                             document.getElementById("money").innerText = money+"元";
-                            // console.log(leg.steps);
+
                             if (totalDistences <= 1.5) {
                                 var taxmoney = 85;
                             } else {
