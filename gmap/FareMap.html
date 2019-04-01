@@ -137,7 +137,7 @@
                     }, function (response, status) {
                         if (status === 'OK') {
                             directionsDisplay.setDirections(response);
-                            // console.log(response);
+                            console.log(response);
                             var leg = response.routes[0].legs[0];
                             var totalDistences = 0;
                             var totalTime = 0;
@@ -155,7 +155,7 @@
                                     TollDistences += parseInt(step.distance.value) / 1000;
                                 }
 
-                                //  console.log(Distences);
+                                 console.log(Distences);
                                 money = Math.floor((totalDistences * 5) + (TollDistences * 1.2));
                                 totalDistences = Math.round(totalDistences * 100) / 100;
                                 totalTime = Math.round(totalTime * 100) / 100;
@@ -201,6 +201,7 @@
                                 totalTime += parseInt(step.duration.value) / 60;
                                 totalDistences = Math.round(totalDistences * 100) / 100;
                                 totalTime = Math.round(totalTime * 100) / 100;
+                                console.log(step);
                             }
                             document.getElementById("totalDistnceText2").innerText = totalDistences;
                             document.getElementById("totalTime2").innerText = totalTime;
