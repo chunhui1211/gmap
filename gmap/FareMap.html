@@ -47,9 +47,7 @@
                     <span id="totalTime"></span><br/>
                     費用:
                     <span id="money"></span><br/>
-                    totalSection:
-                    <span id="totalSection"></span><br/>
-                    TollDistences:
+                    收費路段:
                     <span id="TollDistences"></span><br/>
                 </div>
                 <div class="p-2 mt-1">
@@ -159,7 +157,7 @@
                                 var Distences = step.instructions;
                                 Distences.includes("收費路段");
                                 if (Distences.includes("收費路段") == true) {
-                                    Tollsection++;
+                                    // Tollsection++;
                                     TollDistences += parseInt(step.distance.value) / 1000;
                                 }
 
@@ -171,7 +169,6 @@
                             }
                             document.getElementById("totalDistnceText").innerText = totalDistences;
                             document.getElementById("totalTime").innerText = totalTime;
-                            document.getElementById("totalSection").innerText = leg.steps.length;
                             document.getElementById("TollDistences").innerText = TollDistences;
                             document.getElementById("money").innerText = money;
                             // console.log(leg.steps);
