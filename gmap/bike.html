@@ -26,7 +26,7 @@
             url:"http://opendata.hccg.gov.tw/dataset/1f334249-9b55-4c42-aec1-5a8a8b5e07ca/resource/4d5edb22-a15e-4097-8635-8e32f7db601a/download/20180212143756340.json",
             type:"GET",
         }).done(function(data){
-            for(var item of data)
+            for(var item in data)
             {
                 var marker = new google.maps.Marker({
                     position: {
