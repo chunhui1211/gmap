@@ -14,21 +14,32 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-        <div class="col">
-        </div>
-        <div class="col m-3">
-            <h1>新竹景點規劃</h1>
-        </div>
-        <div class="col">
+            <div class="col">
+            </div>
+            <div class="col m-3">
+                <h1>新竹景點規劃</h1>
+            </div>
+            <div class="col">
 
+            </div>
         </div>
-    </div>
         <div class="row">
             <div class="col-8">
                 <div id="map" style="width:1000px;height:700px"></div>
             </div>
             <div class="col">
                 <div class="row">
+                        <p>旅館</p>
+                        <select id="hotel" class="form-control" style="width:400px;"></select>
+                </div>
+                <div class="row">
+                        <p>景點</p>
+                        <select id="place" class="form-control" style="width:400px;" multiple></select>
+                </div>
+                <div class="row">
+                        <button type="button" id="create" class="btn btn-light">規劃路線</button>
+                </div>
+                <!-- <div class="row">
                     <div class="col">
                         <div class="form-group">
                             <p>旅館</p>
@@ -44,11 +55,11 @@
                     <div class="col">
                         <div class="form-group">
                             <p>餐廳</p>
-                            <!-- <select id="rest" class="form-control" style="width:400px;" multiple></select> -->
+                            <select id="rest" class="form-control" style="width:400px;" multiple></select>
                             <button type="button" id="create" class="btn btn-light">規劃路線</button>
-                        </div>                    
+                        </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -62,7 +73,7 @@
                 lat: 24.8016170,
                 lng: 120.971574
             };
-            
+
             var routes = [];
             var directionsService = new google.maps.DirectionsService();
             var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -74,15 +85,15 @@
             document.getElementById('create').addEventListener('click', function () {
                 displayRoute(directionsService, directionsDisplay);
             });
-            function displayRoute(directionsService,directionsDisplay)
-            {
+
+            function displayRoute(directionsService, directionsDisplay) {
                 var waypoints = [];
                 var place_Array = document.getElementById('place');
                 for (var i = 0; i < place_Array.length; i++) {
                     if (place_Array.options[i].selected) {
                         waypoints.push({
-                        location: place_Array[i].value,
-                        stopover: true
+                            location: place_Array[i].value,
+                            stopover: true
                         });
                     }
                 }
@@ -90,23 +101,23 @@
                 for (var i = 0; i < rest_Array.length; i++) {
                     if (rest_Array.options[i].selected) {
                         waypoints.push({
-                        location: rest_Array[i].value,
-                        stopover: true
+                            location: rest_Array[i].value,
+                            stopover: true
                         });
                     }
                 }
                 directionsService.route({
-                origin: document.getElementById('hotel').value,
-                destination: document.getElementById('rest').value,
-                waypoints: waypoints,
-                optimizeWaypoints: true,
-                travelMode: 'DRIVING'
+                    origin: document.getElementById('hotel').value,
+                    destination: document.getElementById('rest').value,
+                    waypoints: waypoints,
+                    optimizeWaypoints: true,
+                    travelMode: 'DRIVING'
                 }, function (response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
                 });
 
 
@@ -117,8 +128,8 @@
                 type: "GET",
             }).done(function (data) {
                 for (var item of data) {
-                    var option=document.createElement("option");
-                    option.innerHTML=item.旅館名稱;
+                    var option = document.createElement("option");
+                    option.innerHTML = item.旅館名稱;
                     document.getElementById("hotel").appendChild(option);
                     var marker = new google.maps.Marker({
                         position: {
@@ -137,8 +148,8 @@
                 type: "GET",
             }).done(function (data) {
                 for (var item of data) {
-                    var option=document.createElement("option");
-                    option.innerHTML=item.古蹟名稱;
+                    var option = document.createElement("option");
+                    option.innerHTML = item.古蹟名稱;
                     document.getElementById("place").appendChild(option);
                     var marker = new google.maps.Marker({
                         position: {
@@ -152,7 +163,7 @@
                 }
             })
 
-            
+
 
             // $.ajax({
             //     url: "http://opendata.hccg.gov.tw/dataset/4e722575-66a2-4af9-b1ff-95c2469331d1/resource/e17629a6-f7fb-4895-9d91-9d8e37d79eae/download/20180307103221255.json",
