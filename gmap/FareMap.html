@@ -17,10 +17,9 @@
             <div class="col">
             </div>
             <div class="col m-3">
-                <h1>預估交通費用</h1>
+            <h1>預估交通費用</h1>
             </div>
             <div class="col">
-
             </div>
         </div>
         <div class="row">
@@ -31,33 +30,33 @@
                 <div class="p-2 mt-5">
                     <p class="lead">自行開車</p>
                     距離:
-                    <span id="totalDistnceText"></span><br/>
+                    <span id="totalDistnceText"></span><br />
                     收費路段:
-                    <span id="TollDistences"></span><br/>
+                    <span id="TollDistences"></span><br />
                     時間:
-                    <span id="totalTime"></span><br/>
+                    <span id="totalTime"></span><br />
                     費用:
-                    <span id="money"></span><br/>                   
+                    <span id="money"></span><br />
                 </div>
                 <div class="p-2 mt-1">
                     <p class="lead">搭計程車</p>
                     距離:
-                    <span id="totalDistnceText1"></span><br/>
+                    <span id="totalDistnceText1"></span><br />
                     收費路段:
-                    <span id="TollDistences1"></span><br/>
+                    <span id="TollDistences1"></span><br />
                     時間:
-                    <span id="totalTime1"></span><br/>
+                    <span id="totalTime1"></span><br />
                     費用:
-                    <span id="money1"></span><br/>
+                    <span id="money1"></span><br />
                 </div>
                 <div class="p-2 mt-1">
                     <p class="lead">大眾運輸</p>
                     距離:
-                    <span id="totalDistnceText2"></span><br/>
+                    <span id="totalDistnceText2"></span><br />
                     時間:
-                    <span id="totalTime2"></span><br/>
+                    <span id="totalTime2"></span><br />
                     費用:
-                    <span id="money2"></span><br/>
+                    <span id="money2"></span><br />
                 </div>
             </div>
             <div class="col">
@@ -146,10 +145,12 @@
                                 totalTime = Math.round(totalTime * 100) / 100;
                                 TollDistences = Math.round(TollDistences * 100) / 100;
                             }
-                            document.getElementById("totalDistnceText").innerText = totalDistences+"公里";
-                            document.getElementById("totalTime").innerText = totalTime+"分";
-                            document.getElementById("TollDistences").innerText = TollDistences+"公里";
-                            document.getElementById("money").innerText = money+"元";
+                            document.getElementById("totalDistnceText").innerText = totalDistences +
+                                "公里";
+                            document.getElementById("totalTime").innerText = totalTime + "分";
+                            document.getElementById("TollDistences").innerText = TollDistences +
+                                "公里";
+                            document.getElementById("money").innerText = money + "元";
 
                             if (totalDistences <= 1.5) {
                                 var taxmoney = 85;
@@ -158,10 +159,12 @@
                                 tax = Math.round(tax * 100) / 100;
                                 var taxmoney = (85 + tax * 5) + TollDistences * 1.2;
                             }
-                            document.getElementById("totalDistnceText1").innerText = totalDistences+"公里";;
-                            document.getElementById("totalTime1").innerText = totalTime+"分";;
-                            document.getElementById("TollDistences1").innerText = TollDistences+"公里";;
-                            document.getElementById("money1").innerText = taxmoney+"元";;
+                            document.getElementById("totalDistnceText1").innerText =
+                                totalDistences + "公里";;
+                            document.getElementById("totalTime1").innerText = totalTime + "分";;
+                            document.getElementById("TollDistences1").innerText = TollDistences +
+                                "公里";;
+                            document.getElementById("money1").innerText = taxmoney + "元";;
 
 
                         } else {
@@ -186,20 +189,18 @@
                                 totalDistences = Math.round(totalDistences * 100) / 100;
                                 totalTime = Math.round(totalTime * 100) / 100;
                             }
-                            document.getElementById("totalDistnceText2").innerText = totalDistences+"公里";;
-                            document.getElementById("totalTime2").innerText = totalTime+"分";;
-                            for(var i of response.routes)
-                            {
-                                if(i.fare!=undefined)
-                                {
-                                    document.getElementById("money2").innerText = i.fare.value+"元";
-                                }
-                                else
-                                {
+                            document.getElementById("totalDistnceText2").innerText =
+                                totalDistences + "公里";;
+                            document.getElementById("totalTime2").innerText = totalTime + "分";;
+                            for (var i of response.routes) {
+                                if (i.fare != undefined) {
+                                    document.getElementById("money2").innerText = i.fare.value +
+                                        "元";
+                                } else {
                                     document.getElementById("money2").innerText = "查無此票價";
                                 }
                             }
-                            
+
 
                         } else {
                             window.alert('Directions request failed due to ' + status);
