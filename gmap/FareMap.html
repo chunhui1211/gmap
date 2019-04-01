@@ -205,7 +205,18 @@
                             }
                             document.getElementById("totalDistnceText2").innerText = totalDistences+"公里";;
                             document.getElementById("totalTime2").innerText = totalTime+"分";;
-                            document.getElementById("money2").innerText = "查無此票價";
+                            for(var i of response.routes)
+                            {
+                                if(i.fare!=undefined)
+                                {
+                                    document.getElementById("money2").innerText = i.fare.value+"元";
+                                }
+                                else
+                                {
+                                    document.getElementById("money2").innerText = "查無此票價";
+                                }
+                            }
+                            
 
                         } else {
                             window.alert('Directions request failed due to ' + status);
